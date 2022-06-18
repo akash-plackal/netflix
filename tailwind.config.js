@@ -5,6 +5,9 @@ module.exports = {
     backgroundImage: {
       hero: "url('../src/assets/background.jpg')",
     },
+    fontFamily: {
+      roboto: "Roboto, sans-serif",
+    },
   },
 
   plugins: [],
