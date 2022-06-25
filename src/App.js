@@ -1,6 +1,7 @@
 import Nav from "./components/Nav";
 import Features from "./components/Features";
 import List from "./components/List";
+// import Register from "./pages/Register";
 
 const App = () => {
   return (

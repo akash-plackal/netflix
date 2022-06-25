@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useState, useRef } from "react";
 import Item from "./Item";
 import { MdOutlineArrowBackIos } from "react-icons/md";
 import { MdOutlineArrowForwardIos } from "react-icons/md";
@@ -6,13 +6,17 @@ import { MdOutlineArrowForwardIos } from "react-icons/md";
 const List = () => {
 	const itemRef = useRef();
 
+	const [slideLimit, setSlideLimit] = useState(0);
+
 	const handleClick = (str) => {
 		const distance = itemRef.current.getBoundingClientRect().x;
 
-		if (str === "right") {
+		if (str === "right" && slideLimit > 0) {
+			setSlideLimit(slideLimit - 1);
 			itemRef.current.style.transform = `translateX(${216 + distance}px)`;
 		}
-		if (str === "left") {
+		if (str === "left" && slideLimit < 5) {
+			setSlideLimit(slideLimit + 1);
 			itemRef.current.style.transform = `translateX(${
 				-216 + distance
 			}px)`;
@@ -26,12 +30,12 @@ const List = () => {
 			<button
 				className={`h-32 absolute  w-12 text-4xl text-white z-20 opacity-50 
 						bg-black left-0 `}
-				onClick={() => handleClick("left")}
+				onClick={() => handleClick("right")}
 			>
 				<MdOutlineArrowBackIos />
 			</button>
 
-			<div ref={itemRef} className="flex absolute z-10 ">
+			<div ref={itemRef} id="transition" className="flex absolute z-10 ">
 				<Item />
 				<Item />
 				<Item />
@@ -46,7 +50,7 @@ const List = () => {
 
 			<button
 				className={`h-32 absolute  w-12 text-4xl text-white z-20 opacity-50 bg-black right-0 `}
-				onClick={() => handleClick("right")}
+				onClick={() => handleClick("left")}
 			>
 				<MdOutlineArrowForwardIos />
 			</button>
